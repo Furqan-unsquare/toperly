@@ -170,7 +170,7 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="py-6 border-t border-border flex flex-col md:flex-row items-center justify-between">
           <div className="text-sm text-muted-foreground mb-4 md:mb-0">
-            © 2024 Toperly. All rights reserved. Powered by AI technology.
+            © 2025 Unsquare Labs All rights reserved.
           </div>
           
           {/* Social Links */}

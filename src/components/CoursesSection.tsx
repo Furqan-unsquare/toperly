@@ -1,20 +1,16 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
-import { Clock, Users, Star, Play, ArrowRight, Brain, Code, TrendingUp, Award, Zap, CheckCircle, Timer, Globe } from "lucide-react";
-import courseMlImage from "@/assets/course-ml.jpg";
-import courseDeepLearningImage from "@/assets/course-deep-learning.jpg";
-import courseBusinessAiImage from "@/assets/course-business-ai.jpg";
+import React, { useState } from 'react';
+import { Clock, Users, Star, Play, ArrowRight, Brain, Code, TrendingUp, Award, Zap, CheckCircle, Timer, Globe, ChevronLeft, ChevronRight } from "lucide-react";
 
 const CoursesSection = () => {
+  const [activeIndex, setActiveIndex] = useState(1); // Start with middle course active
+  
   const courses = [
     {
       id: 1,
       title: "Machine Learning Fundamentals",
       subtitle: "Complete Guide to ML Mastery",
       description: "Master the core concepts of machine learning with hands-on projects, real-world applications, and industry best practices from Google engineers.",
-      image: courseMlImage,
+      image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=400&h=300&fit=crop",
       level: "Beginner",
       duration: "8 weeks",
       totalHours: "40 hours",
@@ -47,7 +43,7 @@ const CoursesSection = () => {
       title: "Deep Learning & Neural Networks",
       subtitle: "Advanced AI Model Development",
       description: "Dive deep into neural networks, CNNs, RNNs, and Transformers. Build sophisticated AI models using TensorFlow and PyTorch.",
-      image: courseDeepLearningImage,
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop",
       level: "Advanced",
       duration: "12 weeks",
       totalHours: "75 hours",
@@ -80,7 +76,7 @@ const CoursesSection = () => {
       title: "AI for Business Leaders",
       subtitle: "Strategic AI Implementation",
       description: "Strategic AI implementation and decision-making for executives, managers, and entrepreneurs looking to transform their organizations.",
-      image: courseBusinessAiImage,
+      image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=300&fit=crop",
       level: "Executive",
       duration: "6 weeks",
       totalHours: "25 hours",
@@ -110,7 +106,7 @@ const CoursesSection = () => {
     }
   ];
 
-  const getLevelColor = (level: string) => {
+  const getLevelColor = (level) => {
     switch (level) {
       case "Beginner": return "bg-emerald-100 text-emerald-700 border-emerald-200";
       case "Advanced": return "bg-blue-100 text-blue-700 border-blue-200";
@@ -119,78 +115,77 @@ const CoursesSection = () => {
     }
   };
 
-  const getDifficultyColor = (difficulty: number) => {
-    if (difficulty <= 50) return "bg-emerald-500";
-    if (difficulty <= 80) return "bg-blue-500";
-    return "bg-purple-500";
+  const handlePrevious = () => {
+    setActiveIndex(activeIndex === 0 ? courses.length - 1 : activeIndex - 1);
+  };
+
+  const handleNext = () => {
+    setActiveIndex(activeIndex === courses.length - 1 ? 0 : activeIndex + 1);
+  };
+
+  const handleCardClick = (index) => {
+    setActiveIndex(index);
   };
 
   return (
-    <section id="courses" className="py-section bg-gradient-secondary relative overflow-hidden">
-      {/* Background AI Elements */}
+    <section className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+      {/* Background Elements */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-primary rounded-full blur-3xl animate-float-slow"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-accent rounded-full blur-3xl animate-float-slow" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-purple-600 to-blue-600 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Enhanced Section Header */}
-        <div className="text-center mb-20 animate-slide-up">
-          <div className="inline-flex items-center px-6 py-3 bg-accent/40 backdrop-blur-sm rounded-full text-sm font-semibold text-accent-foreground mb-6 border border-primary/20">
-            <Brain className="w-4 h-4 mr-2 text-primary animate-pulse-glow" />
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center px-6 py-3 bg-blue-100 backdrop-blur-sm rounded-full text-sm font-semibold text-blue-800 mb-6 border border-blue-200">
+            <Brain className="w-4 h-4 mr-2 text-blue-600" />
             AI-Powered Course Catalog
-            <div className="w-2 h-2 bg-primary rounded-full ml-2 animate-neural-pulse"></div>
+            <div className="w-2 h-2 bg-blue-600 rounded-full ml-2 animate-pulse"></div>
           </div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6 leading-tight">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             Transform Your Career with{" "}
-            <span className="bg-gradient-primary bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Expert-Led AI Courses
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
             Choose from our comprehensive collection of AI courses, designed by industry experts 
             and enhanced with AI-powered learning technology for maximum effectiveness.
           </p>
         </div>
 
-        {/* Premium Course Grid */}
-        <div className="grid lg:grid-cols-3 gap-8 mb-16">
+        {/* Desktop Grid - Hidden on Mobile */}
+        <div className="hidden lg:grid lg:grid-cols-3 gap-8 mb-16">
           {courses.map((course, index) => (
-            <Card 
+            <div 
               key={course.id}
-              className={`group relative overflow-hidden transition-all duration-700 hover:shadow-elevated border-0 bg-card/80 backdrop-blur-sm animate-scale-in ${
-                course.popular ? 'ring-2 ring-primary shadow-glow-primary scale-105' : ''
+              className={`relative overflow-hidden transition-all duration-700 hover:shadow-2xl border-0 bg-white/80 backdrop-blur-sm rounded-2xl ${
+                course.popular ? 'ring-2 ring-blue-500 shadow-xl scale-105' : 'shadow-lg'
               }`}
-              style={{ animationDelay: `${index * 0.15}s` }}
             >
-              {/* Premium Badges */}
+              {/* Course Card Content - Same as original but simplified for space */}
               <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
                 {course.popular && (
-                  <Badge className="bg-gradient-primary text-primary-foreground animate-pulse-glow shadow-glow-primary">
+                  <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
                     <Star className="w-3 h-3 mr-1" />
                     Most Popular
-                  </Badge>
+                  </div>
                 )}
                 {course.newContent && (
-                  <Badge variant="outline" className="border-emerald-300 text-emerald-600 bg-emerald-50">
+                  <div className="border border-emerald-300 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full text-sm font-semibold flex items-center">
                     <Zap className="w-3 h-3 mr-1" />
                     New Content
-                  </Badge>
-                )}
-                {course.discount && (
-                  <Badge variant="outline" className="border-red-300 text-red-600 bg-red-50">
-                    {course.discount}
-                  </Badge>
+                  </div>
                 )}
               </div>
 
-              {/* Course Image */}
-              <div className="relative overflow-hidden rounded-t-lg">
+              <div className="relative overflow-hidden rounded-t-2xl">
                 <img 
                   src={course.image} 
                   alt={course.title}
-                  className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="w-full h-48 object-cover hover:scale-110 transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
                 <div className="absolute bottom-4 left-4 right-4">
@@ -204,189 +199,280 @@ const CoursesSection = () => {
                 </div>
               </div>
 
-              <CardHeader className="pb-4">
-                {/* Level & Rating */}
+              <div className="p-6">
                 <div className="flex items-center justify-between mb-3">
-                  <Badge 
-                    variant="outline" 
-                    className={getLevelColor(course.level)}
-                  >
+                  <div className={`px-3 py-1 rounded-full text-sm font-medium border ${getLevelColor(course.level)}`}>
                     {course.level}
-                  </Badge>
-                  <div className="flex items-center space-x-1 text-sm text-muted-foreground">
+                  </div>
+                  <div className="flex items-center space-x-1 text-sm text-gray-600">
                     <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
                     <span className="font-semibold">{course.rating}</span>
                     <span>({course.reviews.toLocaleString()})</span>
                   </div>
                 </div>
                 
-                {/* Course Title */}
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors mb-1">
+                <h3 className="text-xl font-bold hover:text-blue-600 transition-colors mb-1">
                   {course.title}
                 </h3>
-                <p className="text-sm font-medium text-primary mb-2">{course.subtitle}</p>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                <p className="text-sm font-medium text-blue-600 mb-2">{course.subtitle}</p>
+                <p className="text-gray-600 text-sm leading-relaxed mb-4">
                   {course.description}
                 </p>
 
-                {/* Instructor */}
-                <div className="flex items-center space-x-3 mb-4 p-3 bg-accent/30 rounded-lg">
-                  <div className="w-8 h-8 bg-gradient-primary rounded-full flex items-center justify-center">
-                    <span className="text-xs font-bold text-primary-foreground">
+                <div className="flex items-center space-x-3 mb-4 p-3 bg-blue-50 rounded-lg">
+                  <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                    <span className="text-xs font-bold text-white">
                       {course.instructor.split(' ').map(n => n[0]).join('')}
                     </span>
                   </div>
                   <div>
                     <div className="text-sm font-semibold">{course.instructor}</div>
-                    <div className="text-xs text-muted-foreground">{course.instructorTitle}</div>
-                  </div>
-                </div>
-              </CardHeader>
-
-              <CardContent className="space-y-6">
-                {/* Course Stats */}
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <Clock className="w-4 h-4" />
-                    <span>{course.duration}</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <Users className="w-4 h-4" />
-                    <span>{course.students} students</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <Timer className="w-4 h-4" />
-                    <span>{course.completionRate}% completion</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-muted-foreground">
-                    <Globe className="w-4 h-4" />
-                    <span>Global access</span>
+                    <div className="text-xs text-gray-600">{course.instructorTitle}</div>
                   </div>
                 </div>
 
-                {/* Difficulty Progress */}
-                <div className="space-y-2">
-                  <div className="flex justify-between items-center text-sm">
-                    <span className="font-medium">Difficulty Level</span>
-                    <span className="text-muted-foreground">{course.difficulty}%</span>
-                  </div>
-                  <Progress 
-                    value={course.difficulty} 
-                    className="h-2"
-                  />
-                </div>
-
-                {/* Skills Tags */}
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Technologies & Skills:</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {course.skills.map((skill) => (
-                      <Badge key={skill} variant="outline" className="text-xs border-primary/30 text-primary">
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Key Features */}
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">What you'll master:</h4>
-                  <ul className="space-y-1">
-                    {course.features.slice(0, 4).map((feature) => (
-                      <li key={feature} className="text-sm text-muted-foreground flex items-center">
-                        <CheckCircle className="w-3 h-3 text-emerald-500 mr-2 flex-shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                  {course.features.length > 4 && (
-                    <p className="text-xs text-primary font-medium">+{course.features.length - 4} more features</p>
-                  )}
-                </div>
-
-                {/* AI Features */}
-                <div className="bg-gradient-neural p-3 rounded-lg border border-primary/20">
-                  <h4 className="font-semibold text-sm mb-2 flex items-center text-primary">
-                    <Brain className="w-4 h-4 mr-2" />
-                    AI-Enhanced Learning
-                  </h4>
-                  <div className="flex flex-wrap gap-1">
-                    {course.aiFeatures.map((feature) => (
-                      <Badge key={feature} className="bg-primary/10 text-primary text-xs border-0">
-                        {feature}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Pricing & Actions */}
-                <div className="pt-4 border-t border-border">
+                <div className="pt-4 border-t border-gray-200">
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-2">
-                      <div className="text-3xl font-black text-primary">
+                      <div className="text-3xl font-black text-blue-600">
                         {course.price}
                       </div>
                       {course.originalPrice && (
-                        <div className="text-lg text-muted-foreground line-through">
+                        <div className="text-lg text-gray-500 line-through">
                           {course.originalPrice}
                         </div>
                       )}
                     </div>
-                    <Button variant="outline" size="sm" className="group/btn hover:shadow-glow-secondary">
-                      <Play className="w-4 h-4 group-hover/btn:text-primary group-hover/btn:scale-110 transition-all" />
-                    </Button>
                   </div>
                   
-                  <Button 
-                    className="w-full bg-gradient-primary hover:shadow-glow-primary transform hover:scale-105 transition-all duration-300 group shadow-premium"
-                  >
-                    <Award className="w-4 h-4 mr-2 group-hover:animate-bounce-subtle" />
+                  <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center">
+                    <Award className="w-4 h-4 mr-2" />
                     Enroll Now & Start Learning
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </Button>
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </button>
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
 
-        {/* Enhanced CTA Section */}
-        <div className="text-center bg-gradient-accent/40 backdrop-blur-sm rounded-3xl p-12 border border-primary/20 shadow-glow-secondary">
+        {/* Mobile Carousel - Sliding Version */}
+        <div className="lg:hidden mb-16">
+          {/* Carousel Container - Slides to center selected card */}
+          <div className="relative overflow-hidden">
+            <div 
+              className="flex transition-transform duration-500 ease-out"
+              style={{ 
+                transform: `translateX(calc(-${activeIndex * 100}% + 50% - 50vw/2 + 2rem))`,
+              }}
+            >
+              {courses.map((course, index) => {
+                const isActive = index === activeIndex;
+
+                return (
+                  <div 
+                    key={course.id}
+                    className={`w-80 flex-shrink-0 mx-4 transition-all duration-500 cursor-pointer ${
+                      isActive ? 'opacity-100' : 'opacity-60 hover:opacity-80'
+                    }`}
+                    onClick={() => setActiveIndex(index)}
+                  >
+                    <div className={`relative overflow-hidden transition-all duration-500 shadow-xl bg-white backdrop-blur-sm rounded-2xl ${
+                      course.popular ? 'ring-2 ring-blue-500' : 'border border-gray-200'
+                    }`}>
+                      {/* Badges */}
+                      <div className="absolute top-4 right-4 z-10 flex flex-col gap-2">
+                        {course.popular && (
+                          <div className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold flex items-center">
+                            <Star className="w-3 h-3 mr-1" />
+                            Popular
+                          </div>
+                        )}
+                        {course.newContent && (
+                          <div className="border border-emerald-300 text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full text-xs font-semibold flex items-center">
+                            <Zap className="w-3 h-3 mr-1" />
+                            New
+                          </div>
+                        )}
+                        {course.discount && (
+                          <div className="border border-red-300 text-red-600 bg-red-50 px-3 py-1 rounded-full text-xs font-semibold">
+                            {course.discount}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Image */}
+                      <div className="relative overflow-hidden rounded-t-2xl">
+                        <img 
+                          src={course.image} 
+                          alt={course.title}
+                          className="w-full h-40 object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+                        <div className="absolute bottom-3 left-3 right-3">
+                          <div className="flex items-center justify-between text-white text-sm">
+                            <span className="font-semibold">{course.totalHours}</span>
+                            <div className="flex items-center space-x-1">
+                              <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                              <span>{course.rating}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="p-5">
+                        {/* Level & Rating */}
+                        <div className="flex items-center justify-between mb-3">
+                          <div className={`px-2 py-1 rounded-full text-xs font-medium border ${getLevelColor(course.level)}`}>
+                            {course.level}
+                          </div>
+                          <div className="flex items-center space-x-1 text-sm text-gray-600">
+                            <span className="font-semibold">{course.rating}</span>
+                            <span className="text-xs">({course.reviews.toLocaleString()})</span>
+                          </div>
+                        </div>
+                        
+                        {/* Title */}
+                        <h3 className="text-lg font-bold mb-1 line-clamp-2">
+                          {course.title}
+                        </h3>
+                        <p className="text-sm font-medium text-blue-600 mb-2">{course.subtitle}</p>
+                        <p className="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                          {course.description}
+                        </p>
+
+                        {/* Instructor */}
+                        <div className="flex items-center space-x-3 mb-4 p-3 bg-blue-50 rounded-lg">
+                          <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
+                            <span className="text-xs font-bold text-white">
+                              {course.instructor.split(' ').map(n => n[0]).join('')}
+                            </span>
+                          </div>
+                          <div>
+                            <div className="text-sm font-semibold">{course.instructor}</div>
+                            <div className="text-xs text-gray-600">{course.instructorTitle}</div>
+                          </div>
+                        </div>
+
+                        {/* Stats */}
+                        <div className="grid grid-cols-2 gap-3 text-sm mb-4">
+                          <div className="flex items-center space-x-2 text-gray-600">
+                            <Clock className="w-4 h-4" />
+                            <span>{course.duration}</span>
+                          </div>
+                          <div className="flex items-center space-x-2 text-gray-600">
+                            <Users className="w-4 h-4" />
+                            <span>{course.students}</span>
+                          </div>
+                        </div>
+
+                        {/* Skills */}
+                        <div className="mb-4">
+                          <div className="flex flex-wrap gap-1">
+                            {course.skills.slice(0, 3).map((skill) => (
+                              <div key={skill} className="bg-blue-100 text-blue-700 px-2 py-1 rounded text-xs font-medium border border-blue-200">
+                                {skill}
+                              </div>
+                            ))}
+                            {course.skills.length > 3 && (
+                              <span className="text-xs text-blue-600 font-medium">+{course.skills.length - 3}</span>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* AI Features */}
+                        <div className="bg-gradient-to-r from-blue-50 to-purple-50 p-3 rounded-lg border border-blue-200 mb-4">
+                          <h4 className="font-semibold text-sm mb-2 flex items-center text-blue-700">
+                            <Brain className="w-4 h-4 mr-2" />
+                            AI-Enhanced Learning
+                          </h4>
+                          <div className="flex flex-wrap gap-1">
+                            {course.aiFeatures.map((feature) => (
+                              <div key={feature} className="bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded border-0">
+                                {feature}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Pricing & CTA */}
+                        <div className="pt-4 border-t border-gray-200">
+                          <div className="flex items-center justify-between mb-4">
+                            <div className="flex items-center space-x-2">
+                              <div className="text-2xl font-black text-blue-600">
+                                {course.price}
+                              </div>
+                              {course.originalPrice && (
+                                <div className="text-sm text-gray-500 line-through">
+                                  {course.originalPrice}
+                                </div>
+                              )}
+                            </div>
+                            <button className="p-2 border border-gray-300 rounded-lg hover:bg-blue-50 hover:border-blue-300 transition-colors">
+                              <Play className="w-4 h-4 text-gray-600" />
+                            </button>
+                          </div>
+                          
+                          <button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-white py-3 px-4 rounded-lg font-semibold flex items-center justify-center">
+                            <Award className="w-4 h-4 mr-2" />
+                            Enroll Now
+                            <ArrowRight className="w-4 h-4 ml-2" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Dots Indicator */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {courses.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setActiveIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === activeIndex 
+                    ? 'bg-blue-600 w-6' 
+                    : 'bg-gray-300 hover:bg-gray-400'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center bg-gradient-to-r from-blue-100 to-purple-100 backdrop-blur-sm rounded-3xl p-12 border border-blue-200">
           <div className="max-w-3xl mx-auto">
-            <div className="inline-flex items-center px-6 py-3 bg-primary/10 rounded-full text-sm font-medium text-primary mb-6 animate-pulse-glow">
-              <Brain className="w-4 h-4 mr-2 animate-neural-pulse" />
+            <div className="inline-flex items-center px-6 py-3 bg-blue-200 rounded-full text-sm font-medium text-blue-800 mb-6">
+              <Brain className="w-4 h-4 mr-2" />
               AI-Powered Learning Experience
-              <div className="w-2 h-2 bg-primary rounded-full ml-2 animate-pulse"></div>
+              <div className="w-2 h-2 bg-blue-600 rounded-full ml-2 animate-pulse"></div>
             </div>
             
             <h3 className="text-3xl font-bold mb-4">
               Ready to Join the{" "}
-              <span className="bg-gradient-primary bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 AI Revolution?
               </span>
             </h3>
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg text-gray-600 mb-8">
               New courses added monthly. Join our community of AI professionals and 
               accelerate your career with cutting-edge skills.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg" 
-                className="bg-gradient-primary hover:shadow-glow-primary transform hover:scale-105 transition-all duration-300"
-              >
+              <button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-lg transform hover:scale-105 transition-all duration-300 text-white py-3 px-6 rounded-lg font-semibold flex items-center justify-center">
                 <TrendingUp className="w-5 h-5 mr-2" />
                 Explore All Courses
                 <ArrowRight className="w-5 h-5 ml-2" />
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
-                className="border-primary/30 text-primary hover:bg-primary/5 hover:border-primary/60"
-              >
+              </button>
+              <button className="border border-blue-300 text-blue-600 hover:bg-blue-50 hover:border-blue-600 py-3 px-6 rounded-lg font-semibold flex items-center justify-center transition-all">
                 <Users className="w-5 h-5 mr-2" />
                 Join Community
-              </Button>
+              </button>
             </div>
           </div>
         </div>

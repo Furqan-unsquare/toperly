@@ -2,10 +2,11 @@ import React from "react";
 
 const MentorAccessSection = () => {
   return (
-    <section className="bg-white text-black px-4 md:px-12 lg:px-24 py-16">
+    <section
+      className="bg-white text-black  relative">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
         {/* Left Text */}
-        <div className="space-y-6">
+        <div className="space-y-6 z-10 px-4 md:px-12 lg:px-24 md:pt-0 pt-16">
           <h2 className="text-3xl md:text-4xl font-semibold leading-snug">
             Thrive with Real-Time <br />
             <span className="italic font-medium">Access to 500+ Mentors</span>
@@ -33,30 +34,34 @@ const MentorAccessSection = () => {
           </ul>
         </div>
 
-        {/* Right Side - Laptop + Video */}
-        <div className="relative w-full max-w-2xl mx-auto">
-          {/* MacBook Image */}
-          <img
-            src="/macbook.png"
-            alt="MacBook"
-            className="w-full h-auto z-10 relative"
-          />
+      <div className="bg-gradient-mobile px-4 md:px-12 lg:px-24">
+      {/* Right Side - Laptop + Video */}
+              <div className="relative w-full max-w-2xl mx-auto z-10 mb-10"
+              >
+                {/* MacBook Image */}
+                <img
+                  src="/macbook.png"
+                  alt="MacBook"
+                  className="w-full h-auto z-10 relative"
+                />
 
-          {/* Screen content video or image */}
-          <div className="absolute top-[2%] left-[11%] w-[77%] h-[93%] overflow-hidden rounded-[12px] z-10">
-            <video
-              src="/demo.mp4"
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-full object-cover rounded-[12px]"
-            />
-            {/* If using image instead, replace <video> with:
-            <img src="/screen-content.png" alt="Mentor screen" className="w-full h-full object-cover" />
-            */}
-          </div>
-        </div>
+                {/* Screen content video or image */}
+                <div className="absolute top-[2%] left-[11%] w-[77%] h-[93%] overflow-hidden rounded-[12px] z-20">
+                  <video
+                    src="/demo.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="w-full h-full object-cover rounded-[12px]"
+                  />
+                  {/* If using image instead, replace <video> with:
+                  <img src="/screen-content.png" alt="Mentor screen" className="w-full h-full object-cover" />
+                  */}
+                </div>
+              </div>
+      </div>
+       
       </div>
     </section>
   );
