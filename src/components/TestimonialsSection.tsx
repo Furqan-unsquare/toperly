@@ -96,49 +96,101 @@ const TestimonialsSection = () => {
           ))}
         </div>
 
-        {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card 
-              key={testimonial.name}
-              className="group hover:shadow-elevated transition-all duration-700 border-0 bg-card/90 backdrop-blur-sm animate-scale-in overflow-hidden"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <CardContent className="p-8 relative">
-                <div className="absolute top-4 right-4">
-                  <Quote className="w-8 h-8 text-primary/20" />
+        {/* Testimonials - Horizontal scroll on mobile */}
+        <div className="relative">
+          {/* Mobile horizontal scroll container */}
+          <div className="md:hidden pb-6 -mx-4 px-4">
+            <div className="flex overflow-x-auto space-x-4 py-2 scrollbar-hide">
+              {testimonials.map((testimonial, index) => (
+                <div 
+                  key={testimonial.name}
+                  className="flex-none w-[85vw] max-w-sm"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
+                  <Card className="group hover:shadow-elevated transition-all duration-700 border-0 bg-card/90 backdrop-blur-sm h-full animate-scale-in overflow-hidden">
+                    <CardContent className="p-6 relative h-full">
+                      <div className="absolute top-4 right-4">
+                        <Quote className="w-8 h-8 text-primary/20" />
+                      </div>
+                      
+                      <div className="flex space-x-1 mb-4">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                        ))}
+                      </div>
+                      
+                      <p className="text-muted-foreground mb-4 leading-relaxed">
+                        "{testimonial.content}"
+                      </p>
+                      
+                      <div className="flex items-center space-x-4 mb-3">
+                        <Avatar className="w-10 h-10 group-hover:ring-2 group-hover:ring-primary/20 transition-all">
+                          <AvatarFallback className="bg-gradient-primary text-primary-foreground font-bold">
+                            {testimonial.initials}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div>
+                          <div className="font-bold">{testimonial.name}</div>
+                          <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                          <div className="text-xs font-semibold text-primary">{testimonial.company}</div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-neural p-2 rounded-lg border border-primary/20">
+                        <div className="text-xs font-semibold text-primary">Achievement:</div>
+                        <div className="text-xs text-muted-foreground">{testimonial.achievement}</div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 </div>
-                
-                <div className="flex space-x-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                
-                <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
-                  "{testimonial.content}"
-                </p>
-                
-                <div className="flex items-center space-x-4 mb-4">
-                  <Avatar className="w-12 h-12 group-hover:ring-2 group-hover:ring-primary/20 transition-all">
-                    <AvatarFallback className="bg-gradient-primary text-primary-foreground font-bold text-lg">
-                      {testimonial.initials}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <div className="font-bold text-lg">{testimonial.name}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
-                    <div className="text-xs font-semibold text-primary">{testimonial.company}</div>
+              ))}
+            </div>
+          </div>
+
+          {/* Desktop grid layout */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {testimonials.map((testimonial, index) => (
+              <Card 
+                key={testimonial.name}
+                className="group hover:shadow-elevated transition-all duration-700 border-0 bg-card/90 backdrop-blur-sm animate-scale-in overflow-hidden"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <CardContent className="p-8 relative">
+                  <div className="absolute top-4 right-4">
+                    <Quote className="w-8 h-8 text-primary/20" />
                   </div>
-                </div>
-                
-                <div className="bg-gradient-neural p-3 rounded-lg border border-primary/20">
-                  <div className="text-sm font-semibold text-primary">Achievement:</div>
-                  <div className="text-xs text-muted-foreground">{testimonial.achievement}</div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  
+                  <div className="flex space-x-1 mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
+                    "{testimonial.content}"
+                  </p>
+                  
+                  <div className="flex items-center space-x-4 mb-4">
+                    <Avatar className="w-12 h-12 group-hover:ring-2 group-hover:ring-primary/20 transition-all">
+                      <AvatarFallback className="bg-gradient-primary text-primary-foreground font-bold text-lg">
+                        {testimonial.initials}
+                      </AvatarFallback>
+                    </Avatar>
+                    <div>
+                      <div className="font-bold text-lg">{testimonial.name}</div>
+                      <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                      <div className="text-xs font-semibold text-primary">{testimonial.company}</div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gradient-neural p-3 rounded-lg border border-primary/20">
+                    <div className="text-sm font-semibold text-primary">Achievement:</div>
+                    <div className="text-xs text-muted-foreground">{testimonial.achievement}</div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         </div>
       </div>
     </section>

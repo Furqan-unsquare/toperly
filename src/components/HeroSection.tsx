@@ -13,10 +13,6 @@ const HeroSection = () => {
         <div className="absolute bottom-1/3 left-1/3 w-32 h-32 bg-gradient-accent rounded-full opacity-25 animate-float-slow" style={{ animationDelay: '2s' }}></div>
         <div className="absolute bottom-1/4 right-1/3 w-20 h-20 bg-gradient-primary rounded-full opacity-35 animate-float" style={{ animationDelay: '0.5s' }}></div>
         
-        {/* AI Data Streams */}
-        <div className="absolute top-20 left-0 w-full h-1 bg-gradient-ai-flow opacity-20 animate-ai-flow"></div>
-        <div className="absolute bottom-40 left-0 w-full h-1 bg-gradient-ai-flow opacity-15 animate-ai-flow" style={{ animationDelay: '2s' }}></div>
-        
         {/* Neural Connection Lines */}
         <svg className="absolute inset-0 w-full h-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
           <line x1="20" y1="30" x2="80" y2="70" stroke="url(#grad1)" strokeWidth="0.2" className="animate-pulse" />

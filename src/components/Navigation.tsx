@@ -70,7 +70,7 @@ const Navbar = () => {
 
       {/* Main navbar */}
       <div className={`${
-        isScrolled ? 'h-16' : 'h-24'
+        isScrolled ? 'h-16' : 'h-14 sm:h-16'
       } transition-all duration-300 bg-white`}>
         <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
           {/* Logo */}
