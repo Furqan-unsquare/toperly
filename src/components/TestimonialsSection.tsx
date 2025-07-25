@@ -1,88 +1,99 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
-import { Star, Quote } from "lucide-react";
+import { Star, Quote, Brain, TrendingUp } from "lucide-react";
 
 const TestimonialsSection = () => {
   const testimonials = [
     {
       name: "Sarah Chen",
-      role: "Data Scientist at Google",
-      content: "Toperly's AI courses completely transformed my career. The hands-on approach and real-world projects gave me the confidence to transition into machine learning.",
+      role: "Senior Data Scientist at Google",
+      company: "Google",
+      content: "Toperly's AI-powered learning completely revolutionized how I approach machine learning. The adaptive curriculum and real-time feedback accelerated my skills beyond what I thought possible.",
       rating: 5,
-      initials: "SC"
+      initials: "SC",
+      achievement: "200% salary increase"
     },
     {
       name: "Marcus Rodriguez",
       role: "AI Product Manager at Microsoft",
-      content: "The business-focused AI course helped me understand how to implement AI strategies effectively. Now I lead AI initiatives at my company.",
+      company: "Microsoft", 
+      content: "The business-focused AI course gave me strategic insights that transformed how I lead AI initiatives. Now I'm driving company-wide AI adoption with confidence.",
       rating: 5,
-      initials: "MR"
+      initials: "MR",
+      achievement: "Led $50M AI project"
     },
     {
       name: "Emily Johnson",
       role: "ML Engineer at Tesla",
-      content: "The deep learning course was incredible. The instructors are world-class and the curriculum is cutting-edge. Highly recommend!",
+      company: "Tesla",
+      content: "The deep learning course was phenomenal. The hands-on approach with real neural networks prepared me for the cutting-edge work I do daily in autonomous vehicles.",
       rating: 5,
-      initials: "EJ"
+      initials: "EJ",
+      achievement: "Published 3 AI papers"
     },
     {
       name: "David Kim",
       role: "AI Researcher at OpenAI",
-      content: "Toperly doesn't just teach theory - they show you how to build real AI applications. The project-based learning is unmatched.",
+      company: "OpenAI",
+      content: "Toperly doesn't just teach theory—they show you how to build production-ready AI systems. The project-based learning methodology is absolutely unmatched in the industry.",
       rating: 5,
-      initials: "DK"
+      initials: "DK",
+      achievement: "Founded AI startup"
     },
     {
       name: "Lisa Wang",
       role: "Chief Technology Officer",
-      content: "As a CTO, I needed to understand AI's business impact. Toperly's executive course gave me the strategic insights I needed.",
+      company: "Fortune 500",
+      content: "As a CTO, I needed to understand AI's transformative potential. Toperly's executive course gave me the strategic framework to lead our company's AI transformation successfully.",
       rating: 5,
-      initials: "LW"
+      initials: "LW",
+      achievement: "Led digital transformation"
     },
     {
       name: "James Miller",
-      role: "AI Consultant",
-      content: "The courses are so well-structured and the AI-powered learning system adapts perfectly to my learning style. Amazing experience!",
+      role: "AI Solutions Architect",
+      company: "Amazon Web Services",
+      content: "The AI-powered learning system adapted perfectly to my schedule and learning style. I went from beginner to deploying production ML models in just 3 months.",
       rating: 5,
-      initials: "JM"
+      initials: "JM",
+      achievement: "AWS ML certification"
     }
   ];
 
   return (
-    <section id="reviews" className="py-20 bg-background">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+    <section id="reviews" className="py-section bg-gradient-secondary relative overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-20 animate-slide-up">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black mb-6">
             Trusted by{" "}
             <span className="bg-gradient-primary bg-clip-text text-transparent">
-              AI Professionals
-            </span>{" "}
-            Worldwide
+              Industry Leaders
+            </span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Join thousands of successful graduates who've accelerated their careers 
-            with our AI-powered learning platform.
+          <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
+            Join thousands of AI professionals at top companies who've transformed their careers 
+            with our revolutionary learning platform.
           </p>
         </div>
 
-        {/* Stats Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
-          <div className="text-center animate-scale-in">
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">98%</div>
-            <div className="text-sm text-muted-foreground">Course Completion</div>
-          </div>
-          <div className="text-center animate-scale-in" style={{ animationDelay: '0.1s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">4.9/5</div>
-            <div className="text-sm text-muted-foreground">Average Rating</div>
-          </div>
-          <div className="text-center animate-scale-in" style={{ animationDelay: '0.2s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">85%</div>
-            <div className="text-sm text-muted-foreground">Career Advancement</div>
-          </div>
-          <div className="text-center animate-scale-in" style={{ animationDelay: '0.3s' }}>
-            <div className="text-3xl sm:text-4xl font-bold text-primary mb-2">50K+</div>
-            <div className="text-sm text-muted-foreground">Happy Students</div>
-          </div>
+        {/* Enhanced Stats */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-20">
+          {[
+            { value: "98%", label: "Course Completion", icon: TrendingUp },
+            { value: "4.9/5", label: "Average Rating", icon: Star },
+            { value: "89%", label: "Career Advancement", icon: Brain },
+            { value: "50K+", label: "Success Stories", icon: Quote }
+          ].map((stat, index) => (
+            <div key={stat.label} className="text-center animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <div className="flex items-center justify-center mb-3">
+                <div className="w-12 h-12 bg-gradient-primary rounded-2xl flex items-center justify-center shadow-glow-primary animate-pulse-glow">
+                  <stat.icon className="w-6 h-6 text-primary-foreground" />
+                </div>
+              </div>
+              <div className="text-4xl font-black text-primary mb-2">{stat.value}</div>
+              <div className="text-sm font-medium text-muted-foreground">{stat.label}</div>
+            </div>
+          ))}
         </div>
 
         {/* Testimonials Grid */}
@@ -90,45 +101,44 @@ const TestimonialsSection = () => {
           {testimonials.map((testimonial, index) => (
             <Card 
               key={testimonial.name}
-              className="group hover:shadow-glow-soft transition-all duration-500 border-0 bg-gradient-secondary animate-scale-in"
+              className="group hover:shadow-elevated transition-all duration-700 border-0 bg-card/90 backdrop-blur-sm animate-scale-in overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <div className="flex space-x-1">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-                  <Quote className="w-6 h-6 text-primary/30" />
+              <CardContent className="p-8 relative">
+                <div className="absolute top-4 right-4">
+                  <Quote className="w-8 h-8 text-primary/20" />
                 </div>
                 
-                <p className="text-muted-foreground mb-6 leading-relaxed">
+                <div className="flex space-x-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                
+                <p className="text-muted-foreground mb-6 leading-relaxed text-lg">
                   "{testimonial.content}"
                 </p>
                 
-                <div className="flex items-center space-x-3">
-                  <Avatar className="group-hover:ring-2 group-hover:ring-primary/20 transition-all">
-                    <AvatarFallback className="bg-gradient-primary text-primary-foreground font-semibold">
+                <div className="flex items-center space-x-4 mb-4">
+                  <Avatar className="w-12 h-12 group-hover:ring-2 group-hover:ring-primary/20 transition-all">
+                    <AvatarFallback className="bg-gradient-primary text-primary-foreground font-bold text-lg">
                       {testimonial.initials}
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <div className="font-semibold text-sm">{testimonial.name}</div>
-                    <div className="text-xs text-muted-foreground">{testimonial.role}</div>
+                    <div className="font-bold text-lg">{testimonial.name}</div>
+                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="text-xs font-semibold text-primary">{testimonial.company}</div>
                   </div>
+                </div>
+                
+                <div className="bg-gradient-neural p-3 rounded-lg border border-primary/20">
+                  <div className="text-sm font-semibold text-primary">Achievement:</div>
+                  <div className="text-xs text-muted-foreground">{testimonial.achievement}</div>
                 </div>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        {/* Call to Action */}
-        <div className="text-center mt-16">
-          <div className="inline-flex items-center px-6 py-3 bg-accent/50 rounded-full text-sm font-medium text-accent-foreground mb-6 animate-pulse-glow">
-            <div className="w-2 h-2 bg-primary rounded-full mr-2 animate-pulse"></div>
-            Join our community of AI professionals
-          </div>
         </div>
       </div>
     </section>
