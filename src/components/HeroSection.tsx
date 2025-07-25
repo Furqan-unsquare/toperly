@@ -4,7 +4,7 @@ import heroImage from "@/assets/ai-hero-premium.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-secondary relative overflow-hidden pt-20">
+    <section className="min-h-screen mt-10 flex items-center justify-center bg-gradient-secondary relative overflow-hidden pt-20">
       {/* Advanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Neural Nodes */}

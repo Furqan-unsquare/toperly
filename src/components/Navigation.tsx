@@ -1,177 +1,276 @@
-import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Menu, X, Brain, BookOpen, Users, Star, Zap, Search } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { ChevronDown, Menu, X, ShoppingCart, User } from 'lucide-react';
 
-const Navigation = () => {
-  const [isOpen, setIsOpen] = useState(false);
+const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 50);
     };
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navItems = [
-    { name: "Courses", href: "#courses", icon: BookOpen },
-    { name: "AI Learning", href: "#features", icon: Brain },
-    { name: "Community", href: "#community", icon: Users },
-    { name: "Reviews", href: "#reviews", icon: Star },
+  // Close mobile menu and reset dropdowns when mobile menu is closed
+  const closeMobileMenu = () => {
+    setIsMobileMenuOpen(false);
+    setIsCategoriesOpen(false);
+    setIsUserMenuOpen(false);
+  };
+
+  const topNavItems = [
+    { label: 'For Companies', href: '#' },
+    { label: 'Jobs', href: '#' },
+    { label: 'Events', href: '#' },
+    { label: 'Become a Master', href: '#' },
+    { label: 'Blog', href: '#' }
+  ];
+
+  const mainNavItems = [
+    { label: 'Home', href: '#' },
+    { label: 'All Courses', href: '#' },
+    { label: 'Blog', href: '#' },
+    { label: 'Contact', href: '#' }
+  ];
+
+  const categories = [
+    "Digital Marketing",
+    "Business", 
+    "Lifestyle",
+    "Programming & Tech",
   ];
 
   return (
-    <>
-      {/* AI Neural Network Background */}
-      <div className="fixed top-0 left-0 right-0 h-16 bg-gradient-neural opacity-30 pointer-events-none z-40"></div>
-      
-      <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? 'bg-background/95 backdrop-blur-xl border-b border-border shadow-premium' 
-          : 'bg-background/80 backdrop-blur-lg'
-      }`}>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            {/* Premium Logo */}
-            <div className="flex items-center space-x-3 group">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-primary rounded-xl flex items-center justify-center shadow-glow-primary animate-pulse-glow">
-                  <Brain className="w-6 h-6 text-primary-foreground" />
+    <nav className={`fixed top-0 left-0 right-0 z-50 bg-white text-gray-900 shadow-md transition-all duration-300 ${
+      isScrolled ? 'h-16' : 'h-16 sm:h-24'
+    }`}>
+      {/* Top row - hidden when scrolled */}
+      <div className={`${
+        isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'sm:h-12 opacity-100'
+      } transition-all duration-300 bg-gray-50 border-b border-gray-200`}>
+        <div className="max-w-7xl mx-auto pt-2 px-4 h-full flex items-center justify-end">
+          <div className="hidden md:flex items-center space-x-6 text-sm">
+            {topNavItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="text-gray-600 hover:text-orange-500 transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Main navbar */}
+      <div className={`${
+        isScrolled ? 'h-16' : 'h-24'
+      } transition-all duration-300 bg-white`}>
+        <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between">
+          {/* Logo */}
+          <div className="flex items-center">
+            <div className="flex items-center space-x-3">
+              <img
+                src="/logo.png"
+                alt="Company Logo"
+                className="h-24 w-auto object-contain"
+              />
+              
+              {/* Categories Dropdown - Hidden on mobile */}
+              <div className="relative group hidden lg:flex">
+                <button className="text-gray-900 font-medium hover:text-orange-500 focus:outline-none flex items-center">
+                  Categories
+                  <ChevronDown className="h-4 w-4 ml-1" />
+                </button>
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                  {categories.map((cat) => (
+                    <div
+                      key={cat}
+                      className="px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-orange-500 cursor-pointer"
+                    >
+                      {cat}
+                    </div>
+                  ))}
                 </div>
-                <div className="absolute inset-0 bg-gradient-primary rounded-xl opacity-20 animate-neural-pulse"></div>
-              </div>
-              <div className="flex flex-col">
-                <span className="text-2xl font-bold bg-gradient-primary bg-clip-text text-transparent">
-                  Toperly
-                </span>
-                <span className="text-xs text-muted-foreground -mt-1">AI Learning Platform</span>
               </div>
             </div>
-
-            {/* Desktop Navigation with AI Indicators */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navItems.map((item, index) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className="group flex items-center space-x-2 text-muted-foreground hover:text-primary transition-all duration-300 relative"
-                >
-                  <div className="p-1.5 rounded-lg group-hover:bg-primary/10 transition-colors">
-                    <item.icon className="w-4 h-4" />
-                  </div>
-                  <span className="font-medium">{item.name}</span>
-                  <div className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-primary group-hover:w-full transition-all duration-300"></div>
-                  {/* AI pulse indicator */}
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full opacity-0 group-hover:opacity-100 animate-neural-pulse transition-opacity"></div>
-                </a>
-              ))}
-            </div>
-
-            {/* Search & CTA */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Button 
-                variant="outline" 
-                size="sm" 
-                className="border-primary/30 hover:border-primary/60 hover:shadow-glow-secondary"
-              >
-                <Search className="w-4 h-4 mr-2" />
-                Search
-              </Button>
-              <Button 
-                variant="outline" 
-                size="sm"
-                className="border-primary/30 hover:border-primary/60"
-              >
-                Sign In
-              </Button>
-              <Button 
-                size="sm" 
-                className="bg-gradient-primary hover:shadow-glow-primary transform hover:scale-105 transition-all duration-300"
-              >
-                <Zap className="w-4 h-4 mr-2" />
-                Start Learning
-              </Button>
-            </div>
-
-            {/* Enhanced Mobile Menu Button */}
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="lg:hidden relative p-2 rounded-xl hover:bg-accent/50 transition-colors group"
-            >
-              <div className="w-6 h-6 relative">
-                <Menu className={`w-6 h-6 absolute transition-all duration-300 ${isOpen ? 'opacity-0 rotate-180' : 'opacity-100 rotate-0'}`} />
-                <X className={`w-6 h-6 absolute transition-all duration-300 ${isOpen ? 'opacity-100 rotate-0' : 'opacity-0 -rotate-180'}`} />
-              </div>
-            </button>
           </div>
 
-          {/* Enhanced Mobile Navigation */}
-          {isOpen && (
-            <div className="lg:hidden py-6 border-t border-border bg-gradient-secondary/50 backdrop-blur-xl animate-slide-up">
-              <div className="flex flex-col space-y-6">
-                {/* Mobile Nav Items */}
-                <div className="space-y-4">
-                  {navItems.map((item, index) => (
+          {/* Desktop Navigation */}
+          <div className="hidden lg:flex items-center space-x-8">
+            {mainNavItems.map((item, index) => (
+              <a
+                key={index}
+                href={item.href}
+                className="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors duration-200"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+
+          {/* Right side items */}
+          <div className="flex items-center space-x-4">
+            {/* Search bar - hidden on mobile */}
+            <div className="hidden md:flex items-center">
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search for anything"
+                  className="w-64 px-4 py-2 bg-gray-100 text-gray-900 placeholder-gray-500 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+                />
+                <button className="absolute right-3 top-2.5">
+                  <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+           
+
+            {/* Mobile menu button */}
+            <button
+              className="lg:hidden p-2 text-gray-700 hover:bg-gray-100 rounded-md transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            >
+              {isMobileMenuOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-200 shadow-lg">
+            <div className="px-4 py-4 space-y-4">
+              {/* Mobile search */}
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search for anything"
+                  className="w-full px-4 py-2 bg-gray-100 text-gray-900 placeholder-gray-500 rounded-md border border-gray-200 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent"
+                />
+              </div>
+
+              {/* Mobile navigation items */}
+              {mainNavItems.map((item, index) => (
+                <a
+                  key={index}
+                  href={item.href}
+                  className="block py-2 text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  {item.label}
+                </a>
+              ))}
+
+              {/* Mobile categories - Toggleable */}
+              <div className="border-t border-gray-200 pt-4">
+                <button
+                  className="flex items-center justify-between w-full font-medium text-gray-900 focus:outline-none"
+                  onClick={() => setIsCategoriesOpen(!isCategoriesOpen)}
+                >
+                  <span>Categories</span>
+                  <ChevronDown 
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      isCategoriesOpen ? 'rotate-180' : ''
+                    }`} 
+                  />
+                </button>
+                
+                {/* Categories dropdown content */}
+                <div className={`overflow-hidden transition-all duration-300 ${
+                  isCategoriesOpen ? 'max-h-48 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                }`}>
+                  {categories.map((cat) => (
                     <a
-                      key={item.name}
-                      href={item.href}
-                      onClick={() => setIsOpen(false)}
-                      className="group flex items-center space-x-3 text-muted-foreground hover:text-primary transition-colors py-3 animate-slide-in-left"
-                      style={{ animationDelay: `${index * 0.1}s` }}
+                      key={cat}
+                      href="#"
+                      className="block pl-4 py-2 text-sm text-gray-600 hover:text-orange-500 cursor-pointer transition-colors"
+                      onClick={closeMobileMenu}
                     >
-                      <div className="p-2 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors">
-                        <item.icon className="w-5 h-5" />
-                      </div>
-                      <span className="font-medium">{item.name}</span>
-                      <div className="w-2 h-2 bg-primary rounded-full opacity-0 group-hover:opacity-100 animate-pulse transition-opacity ml-auto"></div>
+                      {cat}
                     </a>
                   ))}
                 </div>
+              </div>
 
-                {/* Mobile Actions */}
-                <div className="flex flex-col space-y-3 pt-4 border-t border-border">
-                  <Button 
-                    variant="outline" 
-                    className="border-primary/30 hover:border-primary/60 justify-start"
-                    onClick={() => setIsOpen(false)}
+              {/* Mobile user actions - Toggleable */}
+              <div className="hidden border-t border-gray-200 pt-4">
+                <button
+                  className="flex items-center justify-between w-full font-medium text-gray-900 focus:outline-none"
+                  onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                >
+                  <span className="flex items-center">
+                    <User className="h-5 w-5 mr-2" /> User
+                  </span>
+                  <ChevronDown 
+                    className={`h-4 w-4 transition-transform duration-200 ${
+                      isUserMenuOpen ? 'rotate-180' : ''
+                    }`} 
+                  />
+                </button>
+                
+                {/* User menu dropdown content */}
+                <div className={`hidden overflow-hidden transition-all duration-300 ${
+                  isUserMenuOpen ? 'max-h-24 opacity-100 mt-2' : 'max-h-0 opacity-0'
+                }`}>
+                  <a 
+                    href="#" 
+                    className="block pl-7 py-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
+                    onClick={closeMobileMenu}
                   >
-                    <Search className="w-4 h-4 mr-2" />
-                    Search Courses
-                  </Button>
-                  <Button 
-                    variant="outline" 
-                    className="border-primary/30 hover:border-primary/60 justify-start"
-                    onClick={() => setIsOpen(false)}
+                    Student
+                  </a>
+                  <a 
+                    href="#" 
+                    className="block pl-7 py-2 text-sm text-gray-600 hover:text-orange-500 transition-colors"
+                    onClick={closeMobileMenu}
                   >
-                    Sign In
-                  </Button>
-                  <Button 
-                    className="bg-gradient-primary hover:shadow-glow-primary justify-start" 
-                    onClick={() => setIsOpen(false)}
-                  >
-                    <Zap className="w-4 h-4 mr-2" />
-                    Start Learning AI
-                  </Button>
-                </div>
-
-                {/* AI Network Visualization */}
-                <div className="flex items-center justify-center pt-4">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-2 h-2 bg-primary rounded-full animate-neural-pulse"></div>
-                    <div className="w-8 h-px bg-gradient-ai-flow"></div>
-                    <Brain className="w-5 h-5 text-primary animate-pulse-glow" />
-                    <div className="w-8 h-px bg-gradient-ai-flow"></div>
-                    <div className="w-2 h-2 bg-primary rounded-full animate-neural-pulse" style={{ animationDelay: '0.5s' }}></div>
-                  </div>
+                    Instructor
+                  </a>
                 </div>
               </div>
+
+              <div className="hidden border-t border-gray-200 pt-4">
+                <a 
+                  href="#" 
+                  className="flex items-center text-gray-700 hover:text-orange-500 transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  <ShoppingCart className="h-5 w-5 mr-2" />
+                  Cart
+                  <span className="ml-2 bg-orange-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                    0
+                  </span>
+                </a>
+              </div>
+
+              {/* Mobile login */}
+              <div className="pt-4 hidden">
+                <button 
+                  className="w-full bg-orange-500 hover:bg-orange-600 text-white py-2 rounded-md text-sm font-medium transition-colors"
+                  onClick={closeMobileMenu}
+                >
+                  Login/Sign Up
+                </button>
+              </div>
             </div>
-          )}
-        </div>
-      </nav>
-    </>
+          </div>
+        )}
+      </div>
+    </nav>
   );
 };
 
-export default Navigation;
+export default Navbar;
