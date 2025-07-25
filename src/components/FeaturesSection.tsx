@@ -6,7 +6,7 @@ const FeaturesSection = () => {
     {
       icon: Brain,
       title: "Neural Learning Paths",
-      description: "AI algorithms analyze your progress and adapt the curriculum in real-time, creating personalized learning experiences that maximize retention.",
+      description: "AI algorithms analyze your progress and adapt the curriculum in real-time, creating personalized learning experiences that retention.",
       gradient: "from-blue-500 via-cyan-500 to-blue-600",
       stats: "50K+ adaptive paths generated"
     },
@@ -89,7 +89,7 @@ const FeaturesSection = () => {
           {features.map((feature, index) => (
             <Card 
               key={feature.title}
-              className="group hover:shadow-elevated transition-all duration-700 border-0 bg-gradient-secondary backdrop-blur-sm animate-scale-in overflow-hidden"
+              className=" transition-all duration-700 border-0 bg-gradient-secondary backdrop-blur-sm animate-scale-in overflow-hidden"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               <CardContent className="p-8 text-center relative">
