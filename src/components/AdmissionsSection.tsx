@@ -151,7 +151,7 @@ const ProfessionalCourseSection = () => {
     }
   };
 
-  const formatPrice = (price: number) => `$${price.toFixed(2)}`;
+  const formatPrice = (price: number) => `₹${price.toFixed(2)}`;
 
   const getLevelColor = (level: string) => {
     switch (level) {
@@ -291,7 +291,7 @@ const ProfessionalCourseSection = () => {
 
                   {/* Skills */}
                   <div className="flex flex-wrap gap-1 mb-4">
-                    {course.skills.slice(0, 3).map((skill, index) => (
+                    {course.skills.slice(0, 2).map((skill, index) => (
                       <span key={index} className="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium">
                         {skill}
                       </span>

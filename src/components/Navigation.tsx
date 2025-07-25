@@ -52,7 +52,7 @@ const Navbar = () => {
       {/* Top row - hidden when scrolled */}
       <div className={`${
         isScrolled ? 'h-0 opacity-0 overflow-hidden' : 'sm:h-12 opacity-100'
-      } transition-all duration-300 bg-gray-50 border-b border-gray-200`}>
+      } transition-all duration-300 bg-gray-50 md:border-b border-gray-200`}>
         <div className="max-w-7xl mx-auto pt-2 px-4 h-full flex items-center justify-end">
           <div className="hidden md:flex items-center space-x-6 text-sm">
             {topNavItems.map((item, index) => (

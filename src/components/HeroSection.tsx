@@ -4,7 +4,7 @@ import heroImage from "@/assets/ai-hero-premium.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen mt-10 flex items-center justify-center bg-gradient-secondary relative overflow-hidden pt-20">
+    <section className="min-h-screen mt-4 md:mt-10 flex items-center justify-center bg-gradient-secondary relative overflow-hidden pt-20">
       {/* Advanced Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Neural Nodes */}
@@ -107,7 +107,7 @@ const HeroSection = () => {
                   <div className="text-3xl sm:text-4xl font-black text-primary mr-2">98%</div>
                   <TrendingUp className="w-6 h-6 text-primary group-hover:animate-bounce-subtle" />
                 </div>
-                <div className="text-sm font-medium text-muted-foreground">Success Rate</div>
+                <div className="text-sm font-medium text-muted-foreground">Our Success Rate</div>
                 <div className="w-full h-1 bg-gradient-primary/20 rounded-full mt-2">
                   <div className="w-[98%] h-full bg-gradient-primary rounded-full animate-ai-flow" style={{ animationDelay: '2s' }}></div>
                 </div>
@@ -140,7 +140,7 @@ const HeroSection = () => {
                 </div>
               </div>
               
-              <div className="absolute -bottom-6 -left-6 bg-card/90 backdrop-blur-lg shadow-glow-secondary rounded-2xl p-4 animate-float border border-primary/20" style={{ animationDelay: '1s' }}>
+              <div className="absolute bottom-1 -left-6 bg-card/90 backdrop-blur-lg shadow-glow-secondary rounded-2xl p-4 animate-float border border-primary/20" style={{ animationDelay: '1s' }}>
                 <div className="flex items-center space-x-2">
                   <Database className="w-8 h-8 text-primary animate-pulse-glow" />
                   <div>
