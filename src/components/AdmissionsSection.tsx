@@ -317,7 +317,7 @@ const ProfessionalCourseSection = () => {
                     </div>
                     <button className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold transition-colors duration-200 flex items-center">
                       Enroll Now
-                      <ChevronRight className="w-4 h-4 ml-1" />
+                      <ChevronRight className="w-4 h-4 ml-2" />
                     </button> 
                   </div>
                 </div>
