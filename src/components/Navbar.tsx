@@ -32,10 +32,10 @@ const Navbar = () => {
   ];
 
   const mainNavItems = [
-    { label: 'Home', href: '#' },
-    { label: 'All Courses', href: '#' },
-    { label: 'Blog', href: '#' },
-    { label: 'Contact', href: '#' }
+    { label: 'Home', href: '/' },
+    { label: 'All Courses', href: '/courses' },
+    { label: 'Blog', href: '/blogs' },
+    { label: 'Contact', href: '/conatct-us' }
   ];
 
   const categories = [
@@ -76,11 +76,11 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex items-center">
             <div className="flex items-center space-x-3">
-              <img
+              <a href="/"><img
                 src="/logo.png"
                 alt="Company Logo"
                 className="h-24 w-auto object-contain"
-              />
+              /></a>
               
               {/* Categories Dropdown - Hidden on mobile */}
               <div className="relative group hidden lg:flex">

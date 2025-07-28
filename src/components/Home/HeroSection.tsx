@@ -38,24 +38,24 @@ const HeroSection = () => {
             </div>
             
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-black leading-[0.9] mb-8 tracking-tight">
-              Master{" "}
+             Making {" "}
               <span className="relative">
                 <span className="bg-gradient-primary bg-clip-text text-transparent animate-gradient-shift bg-[length:200%_auto]">
-                  AI
+                  India
                 </span>
                 <div className="absolute -inset-2 bg-gradient-primary opacity-20 blur-xl animate-pulse-glow"></div>
               </span>
               <br />
               <span className="text-4xl sm:text-5xl lg:text-6xl text-muted-foreground font-light">
-                Transform Your
+                Ready for the Future with
               </span>
               <br />
               <span className="bg-gradient-primary bg-clip-text text-transparent">
-                Future
+                AI
               </span>
             </h1>
             
-            <p className="text-xl sm:text-2xl text-muted-foreground mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="text-xl sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Join <span className="font-semibold text-primary">50,000+</span> professionals mastering 
               cutting-edge AI skills through our immersive, hands-on learning platform.
             </p>
